@@ -25,8 +25,16 @@ Zoo::ouvrirLesPorte();
 
 $exit = false;
 
-while($exit){
+while(!$exit){
+    echo "########################### Outil de gestion du Zoo ###########################\n";
+    $action = readline("Veuillez entrez votre action (1) passer 1 jour, (2) effectuez une commande :");
 
+    switch($action) {
+        case 1 :
+            Zoo::incDay();
+            Zoo::ouvrirLesPorte();
+            break;
+    }
 }
 
 

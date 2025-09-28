@@ -5,7 +5,7 @@ include_once (__DIR__."/Animals.php");
 
 class Zoo {
 
-    private static int $day = 3;
+    private static int $day = 1;
     private static $visitors = [];
     private static $animals = [];
 
