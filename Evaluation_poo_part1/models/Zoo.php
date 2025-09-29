@@ -5,9 +5,11 @@ include_once (__DIR__."/Animals.php");
 
 class Zoo {
 
-    private static int $day = 1;
+    private static int $day = 0;
     private static $visitors = [];
     private static $animals = [];
+    private static int $livraison = 0;
+    private static int $iter;
 
     
 
@@ -42,21 +44,36 @@ class Zoo {
 
     public static function livraison($nmb) {
         echo "\e[1;32mUne livraison de " . $nmb . " animaux a ete effectuee.\e[0m\n";
-        while($nmb !== 0){
-        $name = Animals::$names[rand (0, count(Animals::$names) -1)];
-        $espece = "Serpent";
-        $regime = "Carnivor";
-        ${"animal_" . $name . "_" . self::getDay()} = new Animals($espece, $regime, $name);
-        $nmb -= 1;
+        if ($nmb >= 0) {
+            while($nmb !== 0){
+                $name = Animals::$names[rand (0, count(Animals::$names) -1)];
+                $espece = "Serpent";
+                $regime = "Carnivor";
+                ${"animal_" . $name . "_" . self::getDay()} = new Animals($espece, $regime, $name);
+                $nmb -= 1;
+            }
+        } else {
+            echo "Aucun animal a ete livrer aujourd'hui";
         }
+
     }
 
+
     public static function naissance() {
-        $iter = self::$day;
+        
+        if (!isset(self::$iter)){
+            self::$iter = 0;
+        }
+
+        if (self::$iter >= count(self::$animals)){
+            self::$iter = 0;
+        }
         echo "\e[1;32mUn nouvel animal est ne dans le zoo\e[0m\n";
-        self::$animals[$iter]->donnerNaissance();
-        $iter += 1;
-    }
+            self::$animals[self::$iter]->donnerNaissance();
+            self::$iter ++;
+            echo self::$iter;
+        }
+
 
     public static function ouvrirLesPorte() {
         if (count(self::$visitors) >= 2) {

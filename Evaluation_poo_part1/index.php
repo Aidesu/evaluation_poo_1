@@ -27,14 +27,20 @@ $exit = false;
 
 while(!$exit){
     echo "########################### Outil de gestion du Zoo ###########################\n";
-    $action = readline("Veuillez entrez votre action (1) passer 1 jour, (2) effectuez une commande :");
+    $action = readline("Veuillez entrez votre action (1) passer 1 jour, (2) effectuez une commande et passer 1 jour :");
 
     switch($action) {
         case 1 :
             Zoo::incDay();
             Zoo::ouvrirLesPorte();
-            break;
-    }
+        break;
+        case 2 : 
+            $nmb = readline("Entrez le nombre d'animal que vous voulez vous faire livrer : ");
+            Zoo::livraison($nmb);
+            Zoo::ouvrirLesPorte();
+       
+        break;
+        }
 }
 
 
